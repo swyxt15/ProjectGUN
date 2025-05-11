@@ -84,6 +84,7 @@ header {
     box-shadow: 0 0 10px rgba(238, 130, 238, 0.6), 0 0 20px rgba(238, 130, 238, 0.6);
     transition: all 0.3s ease-in-out;
     font-family: 'Press Start 2P', cursive; 
+    visibility: visible;
 }
 
 .cell:hover {
