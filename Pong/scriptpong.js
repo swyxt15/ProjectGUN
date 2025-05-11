@@ -98,8 +98,8 @@ function gameLoop() {
     update();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
-    drawPaddle(0, paddleY, "#f28cb1");
-    drawPaddle(canvas.width - paddleWidth, aiPaddleY, "#d16e97");
+    drawPaddle(0, paddleY, "#fcbad3"); // joueur
+    drawPaddle(canvas.width - paddleWidth, aiPaddleY, "#e295b5"); // IA
     drawHUD();
     requestAnimationFrame(gameLoop);
   }
