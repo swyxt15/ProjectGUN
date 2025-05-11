@@ -29,9 +29,8 @@ function drawPaddle(x, y, color) {
   ctx.shadowBlur = 15;
   ctx.fillStyle = color;
   ctx.fillRect(x, y, paddleWidth, paddleHeight);
-  ctx.shadowBlur = 0; 
+  ctx.shadowBlur = 0;
 }
-
 
 function drawBall() {
   ctx.beginPath();
@@ -45,29 +44,44 @@ function update() {
   ballX += ballSpeedX;
   ballY += ballSpeedY;
 
-  if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) ballSpeedY *= -1;
+  // Rebond sur le haut/bas
+  if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
+    ballSpeedY *= -1;
+  }
 
+  // Collision avec paddle joueur
   if (ballX - ballRadius < paddleWidth) {
-    if (ballY > paddleY && ballY < paddleY + paddleHeight) ballSpeedX *= -1;
-    else {
-      aiLives--;
-      resetBall();
-      if (aiLives <= 0) nextLevel();
+    if (ballY > paddleY && ballY < paddleY + paddleHeight) {
+      ballSpeedX *= -1;
     }
   }
 
+  // Collision avec paddle IA
   if (ballX + ballRadius > canvas.width - paddleWidth) {
-    if (ballY > aiPaddleY && ballY < aiPaddleY + paddleHeight) ballSpeedX *= -1;
-    else {
-      playerLives--;
-      resetBall();
-      if (playerLives <= 0) endGame();
+    if (ballY > aiPaddleY && ballY < aiPaddleY + paddleHeight) {
+      ballSpeedX *= -1;
     }
   }
 
+  // Balle sort à gauche : joueur perd
+  if (ballX - ballRadius < 0) {
+    playerLives--;
+    resetBall();
+    if (playerLives <= 0) endGame();
+  }
+
+  // Balle sort à droite : IA perd
+  if (ballX + ballRadius > canvas.width) {
+    aiLives--;
+    resetBall();
+    if (aiLives <= 0) nextLevel();
+  }
+
+  // Contrôles joueur
   if ((up || z) && paddleY > 0) paddleY -= 7;
   if ((down || s) && paddleY < canvas.height - paddleHeight) paddleY += 7;
 
+  // IA suit la balle
   if (aiPaddleY + paddleHeight / 2 < ballY - 10) aiPaddleY += aiSpeed;
   if (aiPaddleY + paddleHeight / 2 > ballY + 10) aiPaddleY -= aiSpeed;
 }
@@ -87,7 +101,8 @@ function resetBall() {
 }
 
 function endGame() {
-  alert(playerLives <= 0 ? "Vous avez perdu 😢" : "Vous avez gagné 🎉");
+  const message = playerLives <= 0 ? "Vous avez perdu 😢" : "Vous avez gagné 🎉";
+  alert(message);
   menu.style.display = 'block';
   canvas.style.display = 'none';
   gameRunning = false;
