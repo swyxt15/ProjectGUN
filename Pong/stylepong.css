@@ -4,14 +4,14 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(to bottom right, #3b1c33, #1f1022);
+  background: linear-gradient(to bottom right, #2c1a2f, #130a1a);
   font-family: 'Quicksand', sans-serif;
 }
 
 canvas {
   border: 4px solid #f8c8dc;
   border-radius: 16px;
-  background: radial-gradient(circle, #5a3d57, #1e132a);
+  background: radial-gradient(circle, #3a253e, #1a0f20);
   box-shadow: 0 0 40px rgba(255, 182, 193, 0.4);
 }
 
