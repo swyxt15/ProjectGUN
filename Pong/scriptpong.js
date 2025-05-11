@@ -18,8 +18,8 @@ function drawHeart(x, y) {
 function drawHUD() {
   ctx.fillStyle = '#ffd6e8';
   ctx.font = '18px Arial';
-  for (let i = 0; i < playerLives; i++) drawHeart(20 + i * 30, 30);
-  for (let i = 0; i < aiLives; i++) drawHeart(canvas.width - (i + 1) * 30, 30);
+  for (let i = 0; i < aiLives; i++) drawHeart(20 + i * 30, 30);
+  for (let i = 0; i < playerLives; i++) drawHeart(canvas.width - (i + 1) * 30, 30);
   ctx.fillText(`Niveau ${level}`, canvas.width / 2 - 40, 30);
 }
 
@@ -90,9 +90,9 @@ function update() {
 
   // Si balle sort à droite : IA rate => IA perd une vie
   if (ballX + ballRadius > canvas.width) {
-    aiLives--;
+    playerLives--;
     resetBall();
-    if (aiLives <= 0) nextLevel();
+    if (playerLives <= 0) nextLevel();
   }
 
   // Contrôles joueur
