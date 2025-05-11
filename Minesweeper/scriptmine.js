@@ -114,3 +114,21 @@ window.addEventListener('load', () => {
     });
 });
 
+
+
+function changeBackgroundColor() {
+    let bodyElement = document.body;
+    let randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    bodyElement.style.backgroundColor = randomColor;
+}
+
+
+
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    const overlay = document.getElementById('overlay');
+    overlay.addEventListener('transitionend', () => {
+        overlay.remove(); 
+    });
+});
