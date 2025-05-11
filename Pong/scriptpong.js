@@ -5,18 +5,20 @@ const menu = document.getElementById('menu');
 
 const paddleWidth = 10, paddleHeight = 100, ballRadius = 10;
 let paddleY, aiPaddleY, ballX, ballY, ballSpeedX, ballSpeedY;
-let playerLives = 3, aiLives = 3, level = 1, aiSpeed = 3;
+let playerLives = 3, aiLives = 3, level = 1, aiSpeed = 100;
 let up = false, down = false, z = false, s = false;
 let gameRunning = false;
+let lastTime = 0;
 
-// Dessiner un cœur pour les vies
+// Facteur de difficulté IA (plus élevé = moins précis)
+let aiErrorMargin = 80;
+
 function drawHeart(x, y) {
   ctx.font = "24px Arial";
   ctx.fillStyle = "#ffd6e8";
   ctx.fillText("❤️", x, y);
 }
 
-// Dessiner l'interface du jeu (score et vies)
 function drawHUD() {
   ctx.fillStyle = '#ffd6e8';
   ctx.font = '18px Arial';
@@ -25,13 +27,11 @@ function drawHUD() {
   ctx.fillText(`Niveau ${level}`, canvas.width / 2 - 40, 30);
 }
 
-// Dessiner le paddle (joueur ou IA)
 function drawPaddle(x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, paddleWidth, paddleHeight);
 }
 
-// Dessiner la balle
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
@@ -40,15 +40,13 @@ function drawBall() {
   ctx.closePath();
 }
 
-// Réinitialiser la balle après un point
 function resetBall() {
   ballX = canvas.width / 2;
   ballY = canvas.height / 2;
-  ballSpeedX = (Math.random() > 0.5 ? 1 : -1) * (4 + level);
-  ballSpeedY = (Math.random() > 0.5 ? 1 : -1) * (2 + level * 0.3);
+  ballSpeedX = (Math.random() > 0.5 ? 1 : -1) * (250 + level * 30);
+  ballSpeedY = (Math.random() > 0.5 ? 1 : -1) * (150 + level * 15);
 }
 
-// Fin du jeu
 function endGame() {
   const message = playerLives <= 0 ? "Tu as perdu 😢" : "Tu as gagné ! 🏆";
   alert(message);
@@ -57,79 +55,76 @@ function endGame() {
   canvas.style.display = 'none';
 }
 
-// Passer au niveau suivant
 function nextLevel() {
   level++;
   aiLives = 3 + level;
-  aiSpeed += 0.4;
+  aiSpeed += 30;
+  aiErrorMargin = Math.max(10, aiErrorMargin - 10); // IA plus précise
   resetBall();
 }
 
-// Mettre à jour la position de la balle et des paddles
-function update() {
-  ballX += ballSpeedX;
-  ballY += ballSpeedY;
+function update(dt) {
+  ballX += ballSpeedX * dt;
+  ballY += ballSpeedY * dt;
 
-  // Vérifier les collisions avec les murs du haut et du bas
   if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
     ballSpeedY *= -1;
   }
 
-  // Vérifier les collisions avec le paddle du joueur
   if (ballX - ballRadius <= paddleWidth) {
     if (ballY > paddleY && ballY < paddleY + paddleHeight) {
       ballSpeedX *= -1;
     }
   }
 
-  // Vérifier les collisions avec le paddle de l'IA
   if (ballX + ballRadius >= canvas.width - paddleWidth) {
     if (ballY > aiPaddleY && ballY < aiPaddleY + paddleHeight) {
       ballSpeedX *= -1;
     }
   }
 
-  // Si la balle dépasse à gauche (joueur perd une vie)
   if (ballX - ballRadius < 0) {
     playerLives--;
     resetBall();
     if (playerLives <= 0) endGame();
   }
 
-  // Si la balle dépasse à droite (IA perd une vie)
   if (ballX + ballRadius > canvas.width) {
     aiLives--;
     resetBall();
     if (aiLives <= 0) nextLevel();
   }
 
-  // Contrôles du joueur (flèche haut / bas ou Z / S)
-  if ((up || z) && paddleY > 0) paddleY -= 6;
-  if ((down || s) && paddleY < canvas.height - paddleHeight) paddleY += 6;
+  let playerSpeed = 400; // pixels/sec
+  if ((up || z) && paddleY > 0) paddleY -= playerSpeed * dt;
+  if ((down || s) && paddleY < canvas.height - paddleHeight) paddleY += playerSpeed * dt;
 
-  // IA qui suit la balle
-  if (aiPaddleY + paddleHeight / 2 < ballY - 10) aiPaddleY += aiSpeed;
-  if (aiPaddleY + paddleHeight / 2 > ballY + 10) aiPaddleY -= aiSpeed;
+  let aiCenter = aiPaddleY + paddleHeight / 2;
+  let targetY = ballY + aiErrorMargin * (Math.random() - 0.5);
+  if (aiCenter < targetY - 10) aiPaddleY += aiSpeed * dt;
+  else if (aiCenter > targetY + 10) aiPaddleY -= aiSpeed * dt;
 }
 
-// Dessiner la scène
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
-  drawPaddle(0, paddleY, "#fc9bb3"); // Paddle joueur
-  drawPaddle(canvas.width - paddleWidth, aiPaddleY, "#db7093"); // Paddle IA
+  drawPaddle(0, paddleY, "#fc9bb3");
+  drawPaddle(canvas.width - paddleWidth, aiPaddleY, "#db7093");
   drawHUD();
 }
 
-// Boucle de jeu
-function gameLoop() {
+function gameLoop(timestamp) {
   if (!gameRunning) return;
-  update();
+
+  const delta = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+
+  update(delta);
   draw();
+
   requestAnimationFrame(gameLoop);
 }
 
-// Lancer le jeu
 startButton.addEventListener('click', () => {
   menu.style.display = 'none';
   canvas.style.display = 'block';
@@ -137,14 +132,15 @@ startButton.addEventListener('click', () => {
   playerLives = 3;
   aiLives = 3;
   level = 1;
-  aiSpeed = 3;
+  aiSpeed = 100;
+  aiErrorMargin = 80;
   paddleY = canvas.height / 2 - paddleHeight / 2;
   aiPaddleY = canvas.height / 2 - paddleHeight / 2;
   resetBall();
-  gameLoop();
+  lastTime = performance.now();
+  requestAnimationFrame(gameLoop);
 });
 
-// Contrôles du joueur
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowUp') up = true;
   if (e.key === 'ArrowDown') down = true;
