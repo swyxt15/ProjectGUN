@@ -1,40 +1,43 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #4b2c58, #2d1f3d);
-    font-family: 'Quicksand', sans-serif;
-    color: white;
-    text-align: center;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #3b1c33, #1f1022);
+  font-family: 'Quicksand', sans-serif;
 }
 
 canvas {
-    border: 4px solid #fff;
-    border-radius: 16px;
-    background: radial-gradient(circle, #5b3a66, #2d1f3d);
-    box-shadow: 0 0 30px rgba(255, 182, 193, 0.5);
+  border: 4px solid #f8c8dc;
+  border-radius: 16px;
+  background: radial-gradient(circle, #5a3d57, #1e132a);
+  box-shadow: 0 0 40px rgba(255, 182, 193, 0.4);
 }
 
 #menu {
-    position: absolute;
-    top: 40%;
-    text-align: center;
+  position: absolute;
+  top: 40%;
+  text-align: center;
+}
+
+#menu h1 {
+  color: #ffd6e8;
+  text-shadow: 1px 1px 2px #000;
 }
 
 #startButton {
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    background-color: #ffb3c6;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: 0.3s;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  background-color: #a24d7c;
+  color: #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
 }
 
 #startButton:hover {
-    background-color: #ff99aa;
+  background-color: #8a3f6a;
 }
