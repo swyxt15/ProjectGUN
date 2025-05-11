@@ -25,9 +25,13 @@ function drawHUD() {
 }
 
 function drawPaddle(x, y, color) {
+  ctx.shadowColor = 'rgba(255, 200, 255, 0.5)';
+  ctx.shadowBlur = 15;
   ctx.fillStyle = color;
   ctx.fillRect(x, y, paddleWidth, paddleHeight);
+  ctx.shadowBlur = 0; 
 }
+
 
 function drawBall() {
   ctx.beginPath();
