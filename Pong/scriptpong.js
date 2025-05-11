@@ -58,8 +58,11 @@ function endGame() {
 function nextLevel() {
   level++;
   aiLives = 3 + level;
-  aiSpeed = 100 + level * 20; // vitesse IA augmente progressivement
-  aiErrorMargin = Math.max(5, 80 - level * 5); // IA devient plus précise
+
+  aiSpeed = 150 + level * 50;
+
+  aiErrorMargin = Math.max(2, 60 - level * 10);
+
   resetBall();
 }
 
