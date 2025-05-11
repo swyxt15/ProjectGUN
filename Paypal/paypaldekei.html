@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Paiement PayPal</title>
+    <link rel="stylesheet" href="stylepay.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" alt="PayPal Logo">
+            <h1>Paiement Sécurisé avec PayPal</h1>
+        </div>
+        <form id="payment-form" action="#" method="post">
+            <label for="email">Adresse Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="amount">Montant :</label>
+            <input type="number" id="amount" name="amount" required>
+
+            <button type="button" id="pay-button">Payer avec PayPal</button>
+        </form>
+        <div class="footer">
+            <p>PayPal (Europe) S.à r.l. et Cie, S.C.A. Société en Commandite par Actions. Siège social : 22-24 Boulevard Royal, L-2449 Luxembourg. RCS Luxembourg B 118 349.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('pay-button').addEventListener('click', function() {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; // Redirige vers le lien souhaité
+        });
+    </script>
+</body>
+</html>
