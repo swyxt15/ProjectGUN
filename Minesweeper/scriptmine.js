@@ -37,16 +37,7 @@ function placeMines() {
     }
 }
 
-
-const clickSound = new Audio('https://www.myinstants.com/media/sounds/coin.mp3');
-clickSound.volume = 0.3;
-clickSound.play();
-
-
 function revealCell(event) {
-    const clickSound = new Audio('sons/click.mp3'); 
-    clickSound.play();
-
     const cell = event.target;
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
@@ -56,23 +47,21 @@ function revealCell(event) {
     cell.classList.add('revealed');
 
     if (cell.classList.contains('mine')) {
-        cell.textContent = '💥';
-        cell.style.backgroundColor = '#aa3d1e';
-        alert('💀 Boom ! Tu as marché sur une mine dans le désert...');
+        cell.textContent = '💣';
         revealAllMines();
+        alert('💥 Game Over !');
+        return;
     } else {
         const adjacentMines = countAdjacentMines(row, col);
         if (adjacentMines > 0) {
             cell.textContent = adjacentMines;
-            cell.style.color = '#5e3d18';
         } else {
             revealAdjacentCells(row, col);
         }
     }
-checkWinCondition();
+
+    checkWinCondition();
 }
-
-
 
 function countAdjacentMines(row, col) {
     let count = 0;
@@ -96,8 +85,9 @@ function revealAdjacentCells(row, col) {
             const newRow = row + i;
             const newCol = col + j;
             if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS) {
-                if (!cells[newRow][newCol].classList.contains('revealed')) {
-                    cells[newRow][newCol].click();
+                const neighbor = cells[newRow][newCol];
+                if (!neighbor.classList.contains('revealed') && !neighbor.classList.contains('mine')) {
+                    neighbor.click();
                 }
             }
         }
@@ -107,45 +97,14 @@ function revealAdjacentCells(row, col) {
 function revealAllMines() {
     for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
-            if (cells[row][col].classList.contains('mine')) {
-                cells[row][col].classList.add('revealed');
-                cells[row][col].textContent = '💣';
+            const cell = cells[row][col];
+            if (cell.classList.contains('mine')) {
+                cell.classList.add('revealed');
+                cell.textContent = '💣';
             }
         }
     }
 }
-
-restartButton.addEventListener('click', createBoard);
-createBoard();
-
-
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-    
-    const overlay = document.getElementById('overlay');
-    overlay.addEventListener('transitionend', () => {
-        overlay.remove(); 
-    });
-});
-
-
-
-function changeBackgroundColor() {
-    let bodyElement = document.body;
-    let randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-    bodyElement.style.backgroundColor = randomColor;
-}
-
-
-
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-    
-    const overlay = document.getElementById('overlay');
-    overlay.addEventListener('transitionend', () => {
-        overlay.remove(); 
-    });
-});
 
 function checkWinCondition() {
     let revealedCount = 0;
@@ -160,7 +119,12 @@ function checkWinCondition() {
     const nonMineCells = totalCells - MINES;
 
     if (revealedCount === nonMineCells) {
-        alert('Bravo ! Vous avez gagné 🎉');
         revealAllMines();
+        setTimeout(() => {
+            alert('🎉 Bravo ! Vous avez gagné !');
+        }, 100);
     }
 }
+
+restartButton.addEventListener('click', createBoard);
+createBoard();
