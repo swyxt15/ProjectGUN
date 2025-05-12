@@ -4,65 +4,70 @@ body {
     align-items: center;
     background: url('https://images.unsplash.com/photo-1606406055436-4d398acf75a2?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
     background-size: cover;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Courier New', monospace;
     color: #2f2f2f;
     margin: 0;
     height: 100vh;
+    padding-top: 30px;
 }
 
 h1 {
-    margin-top: 20px;
     font-size: 2.5rem;
-    background-color: rgba(255, 255, 255, 0.8);
+    color: #472c1b;
+    text-shadow: 1px 1px 0 #fff3c4;
+    background-color: rgba(255, 248, 220, 0.8);
     padding: 10px 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border: 3px dashed #8b5e3c;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 #game-board {
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 50px);
-    gap: 5px;
-    margin: 20px auto;
-    background-color: rgba(255, 255, 255, 0.4);
+    gap: 2px;
+    background-color: #d2b48c;
     padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 4px ridge #8b5e3c;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.5);
 }
 
 .cell {
     width: 50px;
     height: 50px;
-    background-color: #f5e6cc;
+    background-color: #fff8dc;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 8px;
-    box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
-    transition: background-color 0.2s ease;
+    border: 2px solid #b8860b;
+    border-radius: 4px;
+    box-shadow: inset -2px -2px 0 #fff8dc, inset 2px 2px 0 #b8860b;
+    transition: all 0.1s ease-in-out;
 }
 
 .cell:hover {
-    background-color: #e0cda9;
+    background-color: #f5deb3;
 }
 
 .cell.revealed {
-    background-color: #fff6e0;
-    color: #333;
-    box-shadow: inset 0 0 2px #8b7d6b;
+    background-color: #ede2ba;
+    color: #2f2f2f;
+    border: 2px solid #a67c52;
+    box-shadow: none;
 }
 
 .cell.mine {
-    background-color: #f5e6cc;
     color: #8b0000;
+    background-color: #deb887;
 }
 
 #restart-button {
-    margin-bottom: 30px;
+    margin-top: 20px;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: bold;
