@@ -47,18 +47,21 @@ function revealCell(event) {
     cell.classList.add('revealed');
 
     if (cell.classList.contains('mine')) {
-        cell.textContent = '💣';
-        alert('Game Over!');
+        cell.textContent = '💥';
+        cell.style.backgroundColor = '#aa3d1e';
+        alert('💀 Boom ! Tu as marché sur une mine dans le désert...');
         revealAllMines();
     } else {
         const adjacentMines = countAdjacentMines(row, col);
         if (adjacentMines > 0) {
             cell.textContent = adjacentMines;
+            cell.style.color = '#5e3d18';
         } else {
             revealAdjacentCells(row, col);
         }
     }
 }
+
 
 function countAdjacentMines(row, col) {
     let count = 0;
