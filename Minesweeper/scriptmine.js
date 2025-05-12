@@ -44,6 +44,9 @@ clickSound.play();
 
 
 function revealCell(event) {
+    const clickSound = new Audio('sons/click.mp3'); 
+    clickSound.play();
+
     const cell = event.target;
     const row = parseInt(cell.dataset.row);
     const col = parseInt(cell.dataset.col);
