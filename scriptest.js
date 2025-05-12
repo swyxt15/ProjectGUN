@@ -90,3 +90,8 @@ function filterGames() {
     suggestionBox.style.display = "block";
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("searchInput");
+  input.addEventListener("input", filterGames);
+});
+
