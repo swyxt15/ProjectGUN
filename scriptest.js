@@ -51,7 +51,6 @@ window.onpageshow = function(event) {
 };
 
 
-
 const games = [
     { name: "GUN", url: "https://swyxt15.github.io/Gun/" },
     { name: "Tic Tac Toe", url: "Morpion/Morpion.html" },
