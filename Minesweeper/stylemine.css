@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('https://images.unsplash.com/photo-1606406055436-4d398acf75a2?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed; /* Remplace cette URL pour changer le fond */
+    background: url('https://independent-photo.com/wp-content/uploads/2022/04/LANDOFSINESTHESIA-1.jpg') no-repeat center center fixed; /* Remplace cette URL pour changer le fond */
     background-size: cover;
     font-family: 'Courier New', monospace;
     color: #2f2f2f;
