@@ -12,10 +12,11 @@
         <div class="Barredebase">
             <img src="images/PG.png" alt="Logo" class="logo-header">
             <div class="search-container">
-                <input type="text" placeholder="Rechercher..." class="search-bar">
-                <button class="search-button">🔍</button>
-            </div>
-        </div>
+    			<input type="text" placeholder="Rechercher un jeu..." class="search-bar" id="searchInput" onkeyup="filterGames()">
+   			<button class="search-button">🔍</button>
+    			<ul class="search-suggestions" id="suggestionsList"></ul>
+	    </div>
+	</div>
         <nav id="side-menu" class="side-menu">
             <ul>
                 <li><a href="#">🎮 Jeux recommandés</a>
