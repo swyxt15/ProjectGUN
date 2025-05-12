@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
@@ -13,19 +18,21 @@ html, body {
     overflow-y: auto;
     width: 100vw;
     max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 header {
     background-color: #9370DB;
-    padding: 10px 20px; 
-    text-align: center;
+    padding: 5px 0; 
+    margin: 0; 
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 60px; 
-    z-index: 1000; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative; 
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 main {
@@ -93,14 +100,11 @@ main {
 }
 
 .logo-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px; 
-  height: 60px;
-  cursor: pointer;
-  z-index: 9999;
-  position: relative;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 10px;
+    margin: 0;
 }
 
 
@@ -148,10 +152,10 @@ main {
 
 
 .game-section {
-    margin: 150px auto;
-    width: 60%;
-    justify-content: center;
+    margin: 20px auto; 
+    width: 90%; 
 }
+
 
 #transition-overlay {
   position: fixed;
@@ -199,13 +203,8 @@ h2 {
 
 
 .left-banner, .right-banner {
-    position: absolute;
-    top: 200px;
-    width: 200px;
-    height: 100%;
-    background-color: #D3D3D3;
-    z-index: 10;
-	
+    top: 60px; 
+    height: calc(100vh - 60px); 
 }
 
 .left-banner, .right-banner {
