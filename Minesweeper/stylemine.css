@@ -4,12 +4,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('https://images.unsplash.com/photo-1606788075761-d7633b6a5f9b') no-repeat center center fixed;
+    background-image: url('images/desert.jpg');
     background-size: cover;
-    font-family: 'Freckle Face', cursive;
-    color: #5e3d18;
-    padding-top: 20px;
+    background-position: center;
+    font-family: sans-serif;
+    overflow: hidden; 
 }
+
 
 h1 {
     font-size: 2.5em;
@@ -33,7 +34,7 @@ h1 {
 .cell {
     width: 40px;
     height: 40px;
-    background-color: #edc9af; /* sable */
+    background-color: #edc9af; /* Couleur sable */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,11 +42,13 @@ h1 {
     cursor: pointer;
     border-radius: 6px;
     transition: background-color 0.2s ease;
+    border: 1px solid #a7754d;
 }
 
 .cell:hover {
     background-color: #e2b98b;
 }
+
 
 .cell.revealed {
     background-color: #f8e3c1;
