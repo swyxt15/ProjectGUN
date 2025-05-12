@@ -16,25 +16,29 @@ html, body {
 }
 
 header {
-    background-color:#9370DB;
-    padding: 20px;
+    background-color: #9370DB;
+    padding: 10px 20px; 
     text-align: center;
-    margin: 0; 
-    width: 100%; 
-    position: absolute; 
+    width: 100%;
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    height: 60px; 
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+main {
+    margin-top: 80px; 
+    padding: 20px;
+}
 
 .search-container {
-  position: relative;
-  width: 250px;
-  margin: 10px auto 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 200px; 
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #searchInput {
@@ -47,12 +51,12 @@ header {
   font-size: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   font-family: 'Nunito', sans-serif;
-  box-sizing: border-box; /* Important pour le calcul des dimensions */
+  box-sizing: border-box;
 }
 
 #suggestionsList {
   position: absolute;
-  top: calc(100% - 2px); /* S'ajuste juste en dessous de l'input */
+  top: calc(100% - 2px);
   left: 0;
   width: 100%;
   box-sizing: border-box;
@@ -82,6 +86,10 @@ header {
 
 .search-button:hover {
     background-color: orange;
+}
+
+.side-menu {
+    top: 60px; 
 }
 
 .logo-header {
