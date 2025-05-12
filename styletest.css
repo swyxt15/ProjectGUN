@@ -30,25 +30,28 @@ header {
 
 .search-container {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 300px;
     margin: 0 auto;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
 }
 
 .search-suggestions {
     list-style: none;
     padding: 0;
-    margin: 5px 0 0 0;
+    margin-top: 5px;
     background-color: #2e2e2e;
     border-radius: 10px;
-    width: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     max-height: 200px;
     overflow-y: auto;
     position: absolute;
-    top: 50px;
+    width: 100%;
     z-index: 1000;
     display: none;
 }
@@ -56,24 +59,13 @@ header {
 .search-suggestions li {
     padding: 10px;
     color: #FFD700;
-    font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    transition: background-color 0.2s;
 }
 
 .search-suggestions li:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-
-.search-bar {
-    width: 250px;
-    padding: 8px 12px;
-    border: 2px solid #FF8C00;
-    border-radius: 20px;
-    outline: none;
-    font-size: 14px;
-}
 
 .search-button {
     background-color: #FF8C00;
