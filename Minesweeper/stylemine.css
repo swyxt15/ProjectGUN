@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('image/desert.jpg') no-repeat center center fixed;
+    background: url('images/desert.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Courier New', monospace;
     overflow: hidden;
