@@ -69,7 +69,9 @@ function revealCell(event) {
             revealAdjacentCells(row, col);
         }
     }
+checkWinCondition();
 }
+
 
 
 function countAdjacentMines(row, col) {
@@ -144,3 +146,21 @@ window.addEventListener('load', () => {
         overlay.remove(); 
     });
 });
+
+function checkWinCondition() {
+    let revealedCount = 0;
+    for (let row = 0; row < ROWS; row++) {
+        for (let col = 0; col < COLS; col++) {
+            if (cells[row][col].classList.contains('revealed')) {
+                revealedCount++;
+            }
+        }
+    }
+    const totalCells = ROWS * COLS;
+    const nonMineCells = totalCells - MINES;
+
+    if (revealedCount === nonMineCells) {
+        alert('Bravo ! Vous avez gagné 🎉');
+        revealAllMines();
+    }
+}
