@@ -22,7 +22,7 @@ body {
 .cell {
     width: 50px;
     height: 50px;
-    background-color: #c2b280; /* couleur uniforme */
+    background-color: #c2b280;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,8 +43,8 @@ body {
 }
 
 .cell.revealed.mine {
-    background-color: #ff9999;
-    color: black;
+    background-color: #f0e5c9;
+    cursor: default;
 }
 
 #restart-button {
