@@ -52,4 +52,42 @@ window.onpageshow = function(event) {
 
 
 
+const games = [
+    { name: "GUN", url: "https://swyxt15.github.io/Gun/" },
+    { name: "Tic Tac Toe", url: "Morpion/Morpion.html" },
+    { name: "Minesweeper", url: "Minesweeper/Minesweeper.html" },
+    { name: "Pong", url: "Pong/Pong.html" },
+    { name: "Flappy Bird", url: "https://flappybird.io/" },
+    { name: "Puissance 4", url: "https://www.toupty.com/puissance4.html#gsc.tab=0" },
+    { name: "Battle Ship War", url: "https://playpager.com/bataille-navale/" },
+    { name: "My Little Poney", url: "https://www.jeux123.fr/jeu/les-petits-chevaux" },
+    { name: "Geometrulysse", url: "#" },
+    { name: "Racing Car", url: "#" }
+];
+
+function filterGames() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const suggestionBox = document.getElementById('suggestionsList');
+    suggestionBox.innerHTML = "";
+
+    if (input.trim() === "") {
+        suggestionBox.style.display = "none";
+        return;
+    }
+
+    const filtered = games.filter(game => game.name.toLowerCase().includes(input));
+    if (filtered.length === 0) {
+        suggestionBox.style.display = "none";
+        return;
+    }
+
+    filtered.forEach(game => {
+        const li = document.createElement("li");
+        li.textContent = game.name;
+        li.onclick = () => window.location.href = game.url;
+        suggestionBox.appendChild(li);
+    });
+
+    suggestionBox.style.display = "block";
+}
 
