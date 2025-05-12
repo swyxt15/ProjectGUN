@@ -1,3 +1,7 @@
+const logo = document.querySelector(".logo-header img") || document.querySelector(".logo-header");
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // Nettoyage si overlay est resté après retour arrière
   const existingOverlay = document.getElementById('transition-overlay');
@@ -94,4 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const input = document.getElementById("searchInput");
   input.addEventListener("input", filterGames);
 });
+
+
 
