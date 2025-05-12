@@ -1,90 +1,85 @@
 const cells = document.querySelectorAll('.cell');
-let currentPlayer = 'X';
-let gameState = ["", "", "", "", "", "", "", "", ""];
-const winningConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
+const statusDisplay = document.createElement("p");
+statusDisplay.id = "status";
+document.body.insertBefore(statusDisplay, document.getElementById('game'));
 
-console.log("test")
+let currentPlayer = '🕹️';
+let nextPlayer = '👾';
+let gameState = ["", "", "", "", "", "", "", "", ""];
 let isGameActive = true;
 
-const handleCellClick = (event) => {
-	console.log("Cell clciked")
-    const clickedCell = event.target;
-    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+const winningConditions = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+];
 
-    if (gameState[clickedCellIndex] !== "" || !isGameActive) {
-        return;
-    }
+function updateStatus() {
+    statusDisplay.textContent = isGameActive ? `Tour de ${currentPlayer}` : '';
+}
 
-    gameState[clickedCellIndex] = currentPlayer;
-    clickedCell.textContent = currentPlayer;
-    handleResultValidation();
-};
+function handleCellClick(event) {
+    const cell = event.target;
+    const index = parseInt(cell.getAttribute('data-index'));
 
-const handleResultValidation = () => {
-    let roundWon = false;
-    for (let i = 0; i < winningConditions.length; i++) {
-        const winCondition = winningConditions[i];
-        let a = gameState[winCondition[0]];
-        let b = gameState[winCondition[1]];
-        let c = gameState[winCondition[2]];
-        if (a === "" || b === "" || c === "") {
-            continue;
+    if (gameState[index] !== "" || !isGameActive) return;
+
+    gameState[index] = currentPlayer;
+    cell.textContent = currentPlayer;
+
+    if (checkWin()) return;
+    if (checkDraw()) return;
+
+    // Switch players
+    [currentPlayer, nextPlayer] = [nextPlayer, currentPlayer];
+    updateStatus();
+}
+
+function checkWin() {
+    for (const condition of winningConditions) {
+        const [a, b, c] = condition;
+        if (
+            gameState[a] && 
+            gameState[a] === gameState[b] && 
+            gameState[a] === gameState[c]
+        ) {
+            condition.forEach(i => cells[i].classList.add('winning-cell'));
+            statusDisplay.textContent = `${currentPlayer} a gagné !`;
+            isGameActive = false;
+            return true;
         }
-        if (a === b && b === c) {
-            roundWon = true;
-            break;
-        }
     }
+    return false;
+}
 
-    if (roundWon) {
-        alert(`${currentPlayer} a gagné !`);
+function checkDraw() {
+    if (!gameState.includes("")) {
+        statusDisplay.textContent = "Match nul !";
         isGameActive = false;
-        return;
+        return true;
     }
+    return false;
+}
 
-    let roundDraw = !gameState.includes("");
-    if (roundDraw) {
-        alert("Match nul !");
-        isGameActive = false;
-        return;
-    }
-
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-};
-
-const restartGame = () => {
-	console.log("e")
-    currentPlayer = 'X';
+function restartGame() {
+    currentPlayer = '🕹️';
+    nextPlayer = '👾';
     gameState = ["", "", "", "", "", "", "", "", ""];
     isGameActive = true;
-    cells.forEach(cell => cell.textContent = "");
-};
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove('winning-cell');
+    });
+    updateStatus();
+}
 
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));
 document.getElementById('restart').addEventListener('click', restartGame);
 
-function changeBackgroundColor() {
-    let bodyElement = document.body;
-    let randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-    bodyElement.style.backgroundColor = randomColor;
-}
-
-
-
+// Overlay transition
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    
     const overlay = document.getElementById('overlay');
-    overlay.addEventListener('transitionend', () => {
-        overlay.remove(); 
-    });
+    overlay.addEventListener('transitionend', () => overlay.remove());
+    updateStatus();
 });
