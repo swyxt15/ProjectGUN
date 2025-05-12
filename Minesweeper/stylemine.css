@@ -1,46 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Freckle+Face&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #BEA9E9;
-    font-family: sans-serif;
-    overflow: hidden; 
+    background: url('https://images.unsplash.com/photo-1606788075761-d7633b6a5f9b') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Freckle Face', cursive;
+    color: #5e3d18;
+    padding-top: 20px;
 }
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #4e2e14;
+    text-shadow: 2px 2px 0 #f4e2ba;
+}
+
 #game-board {
     display: grid;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
-    gap: 2px;
+    gap: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border: 4px solid #a7754d;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 .cell {
     width: 40px;
     height: 40px;
-    background-color: #ccc;
+    background-color: #edc9af; /* sable */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
     cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.cell:hover {
+    background-color: #e2b98b;
 }
 
 .cell.revealed {
-    background-color: #eee;
+    background-color: #f8e3c1;
     cursor: default;
+    box-shadow: inset 0 0 3px #5e3d18;
 }
 
 .cell.mine {
-    background-color: #ccc;
-    color: white;
+    background-color: #edc9af;
+    color: red;
 }
 
 #restart-button {
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 10px 25px;
     font-size: 16px;
+    font-family: 'Freckle Face';
+    background-color: #e3a857;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
 }
 
+#restart-button:hover {
+    background-color: #d88f36;
+}
 
 #overlay {
     position: fixed;
@@ -49,12 +83,11 @@ body {
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 1; 
-    z-index: 9999; 
-    transition: opacity 2s ease-out; 
-    pointer-events: none; 
+    opacity: 1;
+    z-index: 9999;
+    transition: opacity 2s ease-out;
+    pointer-events: none;
 }
-
 
 body.loaded #overlay {
     opacity: 0;
