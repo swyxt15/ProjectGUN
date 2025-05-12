@@ -114,10 +114,14 @@ header {
 }
 
 .logo-header {
-  position: relative;
-  z-index: 1000; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px; 
+  height: 60px;
   cursor: pointer;
-  padding: 10px; 
+  z-index: 9999;
+  position: relative;
 }
 
 
