@@ -37,6 +37,12 @@ function placeMines() {
     }
 }
 
+
+const clickSound = new Audio('https://www.myinstants.com/media/sounds/coin.mp3');
+clickSound.volume = 0.3;
+clickSound.play();
+
+
 function revealCell(event) {
     const cell = event.target;
     const row = parseInt(cell.dataset.row);
