@@ -96,8 +96,9 @@ function filterGames() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const input = document.getElementById("searchInput");
-  input.addEventListener("input", filterGames);
+  if (input) {
+    input.addEventListener("input", filterGames);
+  }
 });
-
 
 
