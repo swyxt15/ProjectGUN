@@ -71,9 +71,12 @@ main {
 
 .game-section {
     margin: 3em auto;
-    width: 90%;
+    width: calc(100% - 30vw);
+    margin-left: 15vw;
+    margin-right: 15vw;
     max-width: 1200px;
 }
+
 
 h2 {
     font-size: 1.8em;
@@ -303,4 +306,12 @@ footer {
     .menu-open {
         left: 0;
     }
+
+    
+    .game-section {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
 }
