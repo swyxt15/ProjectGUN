@@ -2,47 +2,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
+:root {
+    --banner-width: 160px;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
     background-color: #BEA9E9;
     font-family: 'Nunito', sans-serif;
-    overflow-x: hidden;
     width: 100%;
+    overflow-x: hidden;
     min-height: 100vh;
 }
 
-/* Layout principal */
-main {
-    display: grid;
-    grid-template-columns: minmax(100px, 15%) 1fr minmax(100px, 15%);
-    gap: 0;
-    width: 100%;
-    padding-top: 140px;
+body {
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--banner-width);
+    padding-right: var(--banner-width);
 }
 
-/* Zone des jeux */
-.game-content {
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-/* Header */
 header {
     background-color: #9370DB;
-    padding: 20px 10px;
+    padding: 20px;
+    text-align: center;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
-    text-align: center;
+    z-index: 999;
 }
 
 .logo-header {
@@ -53,12 +46,12 @@ header {
     height: 80px;
 }
 
-/* Barre de recherche */
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .search-bar {
@@ -66,8 +59,8 @@ header {
     padding: 8px 12px;
     border: 2px solid #FF8C00;
     border-radius: 20px;
-    outline: none;
     font-size: 14px;
+    outline: none;
 }
 
 .search-button {
@@ -85,64 +78,60 @@ header {
     background-color: orange;
 }
 
-/* Sections jeux */
-.game-section {
-    margin-bottom: 50px;
+main {
+    padding-top: 130px;
+    padding-bottom: 40px;
     width: 100%;
+}
+
+.game-section {
+    margin: 50px auto;
+    width: 100%;
+    max-width: 1200px;
 }
 
 h2 {
     font-size: 1.8em;
-    text-align: left;
-    padding: 10px 0;
     color: rgb(46, 22, 0);
-    font-family: 'Nunito', sans-serif;
+    margin-bottom: 20px;
     font-weight: 700;
 }
 
-/* Grille de jeux */
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    justify-content: center;
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
 }
 
 .cell {
-    width: 100%;
-    height: 200px;
     background-color: #222;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2em;
-    cursor: pointer;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6), 0 0 20px rgba(238, 130, 238, 0.6);
+    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6);
     transition: all 0.3s ease-in-out;
-    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
 }
 
 .cell:hover {
-    box-shadow: 0 0 25px rgba(238, 130, 238, 1), 0 0 30px rgba(238, 130, 238, 1);
     transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(238, 130, 238, 1);
     background-color: rgba(34, 34, 34, 0.8);
 }
 
 .cell .game-title {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
     color: #FFA500;
-    font-size: 1em;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    margin-top: 10px;
+    text-align: center;
     opacity: 0;
     transform: translateY(100%);
-    transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
-    text-align: center;
+    transition: 0.4s ease;
 }
 
 .cell:hover .game-title {
@@ -153,28 +142,9 @@ h2 {
 .imgrescale {
     width: 100%;
     height: auto;
-    object-fit: fill;
+    object-fit: contain;
 }
 
-/* Bannières */
-.left-banner, .right-banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #D3D3D3;
-    position: sticky;
-    top: 140px;
-    height: 60vh;
-    z-index: 10;
-}
-
-.left-banner img, .right-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Footer */
 footer {
     background-color: #9370DB;
     padding: 20px;
@@ -182,99 +152,39 @@ footer {
     width: 100%;
 }
 
-/* Menu latéral */
-.side-menu {
+.left-banner, .right-banner {
     position: fixed;
     top: 100px;
-    left: -280px;
-    width: 280px;
-    background-color: #9370DB;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 999;
-    text-align: center;
-    display: block;
-    transition: left 0.3s ease;
+    width: var(--banner-width);
+    height: calc(100% - 100px);
+    background-color: #D3D3D3;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.menu-open {
+.left-banner {
     left: 0;
 }
 
-.side-menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.right-banner {
+    right: 0;
 }
 
-.side-menu ul li {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.left-banner img, .right-banner img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
-.side-menu ul li:last-child {
-    border-bottom: none;
-}
-
-.side-menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    font-family: 'Nunito', sans-serif;
-    display: block;
-    transition: background 0.3s ease;
-}
-
-.side-menu ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-}
-
-.side-menu ul ul {
-    display: block;
-    padding-left: 15px;
-}
-
-.side-menu ul ul li {
-    padding: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-}
-
-.side-menu ul ul li a {
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    color: #FFD700;
-}
-
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Overlay transition */
 #transition-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
+    background: black;
     opacity: 0;
     pointer-events: none;
     z-index: 9999;
@@ -285,36 +195,96 @@ footer {
     opacity: 1;
 }
 
-/* Responsive : mobile ou zoom extrême */
-@media (max-width: 900px) {
-    main {
-        grid-template-columns: 1fr;
+.side-menu {
+    position: fixed;
+    top: 100px;
+    left: -280px;
+    width: 260px;
+    background-color: #9370DB;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+
+.side-menu.menu-open {
+    left: 0;
+}
+
+.side-menu ul {
+    list-style-type: none;
+}
+
+.side-menu ul li {
+    padding: 10px;
+}
+
+.side-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.side-menu ul ul li {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 8px;
+}
+
+.side-menu ul ul li a {
+    font-size: 14px;
+    color: #FFD700;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive padding */
+@media screen and (max-width: 768px) {
+    :root {
+        --banner-width: 80px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    body {
+        padding-left: var(--banner-width);
+        padding-right: var(--banner-width);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --banner-width: 0px;
     }
 
     .left-banner, .right-banner {
         display: none;
     }
 
-    .game-content {
-        padding: 10px;
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .search-bar {
         width: 100%;
-        max-width: 200px;
-    }
-
-    h2 {
-        font-size: 1.5em;
-        text-align: center;
-    }
-
-    .cell {
-        height: 180px;
-        font-size: 0.8em;
-    }
-
-    .cell .game-title {
-        font-size: 0.8em;
     }
 }
