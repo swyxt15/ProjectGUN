@@ -3,16 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
 
-
 html, body {
     background-color:#BEA9E9;
     display: flex;
     flex-direction: column;
     overflow-x: hidden; 
     overflow-y: auto;
-    width: 100vw;
-    max-width: 100%;
+    width: 100%;
 }
+
 
 header {
     background-color:#9370DB;
@@ -109,12 +108,13 @@ header {
     transform: translateY(0);
 }
 
-
 .game-section {
     margin: 150px auto;
-    width: 60%;
-    justify-content: center;
+    max-width: 1200px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
+
 
 h2 {
     font-size: 1.8em;
