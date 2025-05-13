@@ -7,9 +7,11 @@ html, body {
     background-color:#BEA9E9;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     overflow-y: auto;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -110,10 +112,11 @@ header {
 
 .game-section {
     margin: 150px auto;
-    max-width: 1200px;
+    max-width: calc(100% - 440px);
     padding: 0 20px;
     box-sizing: border-box;
 }
+
 
 
 h2 {
