@@ -3,29 +3,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
 html, body {
-    background-color: #BEA9E9;
     margin: 0;
     padding: 0;
+    background-color: #BEA9E9;
     font-family: 'Nunito', sans-serif;
     overflow-x: hidden;
     width: 100%;
+    box-sizing: border-box;
 }
 
 header {
     background-color: #9370DB;
-    padding: 20px;
+    padding: 20px 10px;
     text-align: center;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+main {
+    padding-top: 120px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .logo-header {
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: 10px;
     width: 80px;
     height: 80px;
@@ -45,6 +51,7 @@ header {
     border-radius: 20px;
     outline: none;
     font-size: 14px;
+    max-width: 80%;
 }
 
 .search-button {
@@ -62,17 +69,10 @@ header {
     background-color: orange;
 }
 
-main {
-    padding-top: 140px;
-}
-
-/* GAME SECTIONS */
-
 .game-section {
-    width: 100%;
-    max-width: 1400px;
-    padding: 0 16vw; /* marge dynamique pour laisser place aux bannières */
     margin: 3em auto;
+    width: 90%;
+    max-width: 1200px;
 }
 
 h2 {
@@ -80,16 +80,14 @@ h2 {
     text-align: left;
     color: rgb(46, 22, 0);
     font-weight: 700;
-    margin-bottom: 15px;
 }
 
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    justify-content: center;
 }
-
-/* CELLULE DE JEU */
 
 .cell {
     width: 100%;
@@ -99,17 +97,18 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2em;
+    font-size: 1em;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6), 0 0 20px rgba(238, 130, 238, 0.6);
+    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6);
     transition: all 0.3s ease-in-out;
     font-family: 'Press Start 2P', cursive;
 }
 
 .cell:hover {
-    transform: scale(1.05);
     box-shadow: 0 0 25px rgba(238, 130, 238, 1);
+    transform: scale(1.05);
     background-color: rgba(34, 34, 34, 0.8);
 }
 
@@ -118,12 +117,12 @@ h2 {
     bottom: 10px;
     left: 10px;
     right: 10px;
-    text-align: center;
     color: #FFA500;
     font-size: 1em;
     opacity: 0;
     transform: translateY(100%);
-    transition: opacity 0.3s, transform 0.5s;
+    transition: opacity 0.3s ease-in-out, transform 0.5s ease-in-out;
+    text-align: center;
 }
 
 .cell:hover .game-title {
@@ -136,104 +135,6 @@ h2 {
     height: 100%;
     object-fit: cover;
 }
-
-/* SIDE MENU */
-
-.side-menu {
-    position: fixed;
-    top: 100px;
-    left: 0;
-    width: 260px;
-    background-color: #9370DB;
-    padding: 15px;
-    border-radius: 0 15px 15px 0;
-    box-shadow: 2px 0px 10px rgba(0,0,0,0.2);
-    z-index: 900;
-}
-
-.side-menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-.side-menu ul li {
-    padding: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-.side-menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    display: block;
-}
-
-.side-menu ul li a:hover {
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 10px;
-}
-
-.side-menu ul ul li a {
-    font-size: 14px;
-    color: #FFD700;
-}
-
-/* BANNIÈRES LATÉRALES */
-
-.left-banner, .right-banner {
-    position: fixed;
-    top: 140px;
-    width: 15vw;
-    max-width: 200px;
-    height: 60vh;
-    z-index: 5;
-    background-color: #D3D3D3;
-}
-
-.left-banner {
-    left: 0;
-}
-
-.right-banner {
-    right: 0;
-}
-
-.left-banner img, .right-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* FOOTER */
-
-footer {
-    background-color: #9370DB;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-}
-
-/* SCROLLBAR */
-
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* TRANSITION OVERLAY */
 
 #transition-overlay {
     position: fixed;
@@ -252,11 +153,142 @@ footer {
     opacity: 1;
 }
 
-/* RESPONSIVE ADAPTATIONS */
+.left-banner, .right-banner {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15vw;
+    max-width: 200px;
+    height: 60vh;
+    background-color: #D3D3D3;
+    z-index: 10;
+}
 
-@media (max-width: 1024px) {
-    .game-section {
-        padding: 0 5vw;
+.left-banner {
+    left: 0;
+}
+
+.right-banner {
+    right: 0;
+}
+
+.left-banner img, .right-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+footer {
+    background-color: #9370DB;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 100px;
+    left: -280px;
+    width: 280px;
+    background-color: #9370DB;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    text-align: center;
+    transition: left 0.3s ease;
+}
+
+.menu-open {
+    left: 0;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu ul li {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.side-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.side-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    display: block;
+    transition: background 0.3s ease;
+}
+
+.side-menu ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.side-menu ul ul {
+    display: block;
+    padding-left: 15px;
+}
+
+.side-menu ul ul li {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.side-menu ul ul li a {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #FFD700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-bar {
+        width: 150px;
+        font-size: 12px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .game-title {
+        font-size: 0.8em;
+    }
+
+    .logo-header {
+        width: 50px;
+        height: 50px;
     }
 
     .left-banner, .right-banner {
@@ -264,27 +296,11 @@ footer {
     }
 
     .side-menu {
-        position: static;
-        width: 100%;
-        border-radius: 0;
-        box-shadow: none;
-    }
-}
-
-@media (max-width: 600px) {
-    .search-bar {
-        width: 150px;
+        width: 80%;
+        left: -80%;
     }
 
-    .cell {
-        font-size: 0.8em;
-    }
-
-    .cell .game-title {
-        font-size: 0.7em;
-    }
-
-    h2 {
-        font-size: 1.4em;
+    .menu-open {
+        left: 0;
     }
 }
