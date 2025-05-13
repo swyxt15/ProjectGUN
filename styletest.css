@@ -27,60 +27,69 @@ body {
     padding-right: var(--banner-width);
 }
 
-/* HEADER */
 header {
     background-color: #9370DB;
     padding: 20px;
     text-align: center;
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 999;
 }
+
 .logo-header {
-    position: absolute; top: 5px; left: 10px;
-    width: 80px; height: 80px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 80px;
+    height: 80px;
 }
+
 .search-container {
-    display: flex; justify-content: center; align-items: center;
-    margin-top: 10px; flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
+
 .search-bar {
-    width: 250px; max-width: 90%;
+    width: 250px;
     padding: 8px 12px;
     border: 2px solid #FF8C00;
     border-radius: 20px;
-    font-size: 14px; outline: none;
+    font-size: 14px;
+    outline: none;
 }
+
 .search-button {
-    background-color: #FF8C00; color: white;
-    border: none; padding: 8px 12px;
-    margin-left: 5px; border-radius: 50%; cursor: pointer;
+    background-color: #FF8C00;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    margin-left: 5px;
+    border-radius: 50%;
+    cursor: pointer;
     font-size: 16px;
 }
-.search-button:hover { background-color: orange; }
 
-/* MAIN LAYOUT */
+.search-button:hover {
+    background-color: orange;
+}
+
 main {
-    display: grid;
-    grid-template-columns: minmax(100px, 15%) 1fr minmax(100px, 15%);
-    gap: 0;
-    width: 100%;
     padding-top: 130px;
     padding-bottom: 40px;
-}
-
-/* CONTENU CENTRAL */
-.game-content {
     width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
 }
 
-/* SECTIONS JEUX COMMUNES */
 .game-section {
-    margin-bottom: 50px;
+    margin: 50px auto;
+    width: 100%;
+    max-width: 1200px;
 }
+
 h2 {
     font-size: 1.8em;
     color: rgb(46, 22, 0);
@@ -88,65 +97,43 @@ h2 {
     font-weight: 700;
 }
 
-/* GRILLES SPÉCIFIQUES */
-.game-section:nth-of-type(1) .game-grid {
-    /* Jeux recommandés : grandes icônes, espacement large */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.game-section:nth-of-type(2) .game-grid {
-    /* Nouveaux jeux : taille moyenne, rapprochées */
+.game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
+    gap: 20px;
 }
 
-.game-section:nth-of-type(3) .game-grid {
-    /* Jeux à venir : petites icônes, grille tassée */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 8px;
-}
-
-/* STYLES DES CELLS */
 .cell {
     background-color: #222;
     border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(238, 130, 238, 0.6);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
+
 .cell:hover {
     transform: scale(1.05);
     box-shadow: 0 0 25px rgba(238, 130, 238, 1);
     background-color: rgba(34, 34, 34, 0.8);
 }
 
-/* L’aspect-ratio garantit le carré quoi qu’il arrive */
-.cell {
-    aspect-ratio: 1 / 1;
-    width: 100%;
-}
-
 .cell .game-title {
-    font-family: 'Press Start 2P', cursive;
     color: #FFA500;
-    font-size: 0.8em;
-    position: absolute;
-    bottom: 10px; left: 10px; right: 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    margin-top: 10px;
     text-align: center;
     opacity: 0;
     transform: translateY(100%);
-    transition: opacity 0.3s, transform 0.5s;
+    transition: 0.4s ease;
 }
+
 .cell:hover .game-title {
     opacity: 1;
     transform: translateY(0);
@@ -154,31 +141,10 @@ h2 {
 
 .imgrescale {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* BANNIÈRES */
-.left-banner, .right-banner {
-    position: fixed;
-    top: 130px;
-    width: var(--banner-width);
-    height: calc(100% - 130px);
-    background-color: #D3D3D3;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.left-banner { left: 0; }
-.right-banner { right: 0; }
-.left-banner img, .right-banner img {
-    width: 100%;
     height: auto;
     object-fit: contain;
 }
 
-/* FOOTER */
 footer {
     background-color: #9370DB;
     padding: 20px;
@@ -186,59 +152,139 @@ footer {
     width: 100%;
 }
 
-/* MENU LATÉRAL */
+.left-banner, .right-banner {
+    position: fixed;
+    top: 100px;
+    width: var(--banner-width);
+    height: calc(100% - 100px);
+    background-color: #D3D3D3;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-banner {
+    left: 0;
+}
+
+.right-banner {
+    right: 0;
+}
+
+.left-banner img, .right-banner img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+#transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#transition-overlay.active {
+    opacity: 1;
+}
+
 .side-menu {
     position: fixed;
-    top: 100px; left: -280px;
+    top: 100px;
+    left: -280px;
     width: 260px;
     background-color: #9370DB;
     padding: 15px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: left 0.3s;
     z-index: 1000;
+    transition: left 0.3s ease;
 }
-.side-menu.menu-open { left: 0; }
-.side-menu ul { list-style: none; }
-.side-menu ul li { padding: 10px; }
+
+.side-menu.menu-open {
+    left: 0;
+}
+
+.side-menu ul {
+    list-style-type: none;
+}
+
+.side-menu ul li {
+    padding: 10px;
+}
+
 .side-menu ul li a {
-    color: white; text-decoration: none; font-size: 18px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
 }
+
 .side-menu ul ul li {
-    background: rgba(255,255,255,0.1);
-    margin-top: 5px; padding: 8px; border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 8px;
 }
+
 .side-menu ul ul li a {
-    font-size: 14px; color: #FFD700;
+    font-size: 14px;
+    color: #FFD700;
 }
 
-/* OVERLAY */
-#transition-overlay {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: black; opacity: 0;
-    pointer-events: none; z-index: 9999;
-    transition: opacity 0.5s;
+/* Scrollbar custom */
+::-webkit-scrollbar {
+    width: 6px;
 }
-#transition-overlay.active { opacity: 1; }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 ::-webkit-scrollbar-thumb {
-    background: #888; border-radius: 10px;
+    background: #888;
+    border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover { background: #555; }
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    :root { --banner-width: 80px; }
-    body { padding-left: var(--banner-width); padding-right: var(--banner-width); }
+/* Responsive padding */
+@media screen and (max-width: 768px) {
+    :root {
+        --banner-width: 80px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    body {
+        padding-left: var(--banner-width);
+        padding-right: var(--banner-width);
+    }
 }
-@media (max-width: 480px) {
-    :root { --banner-width: 0; }
-    .left-banner, .right-banner { display: none; }
-    body { padding: 0 10px; }
-    .search-bar { width: 100%; }
-    h2 { text-align: center; font-size: 1.5em; }
+
+@media screen and (max-width: 480px) {
+    :root {
+        --banner-width: 0px;
+    }
+
+    .left-banner, .right-banner {
+        display: none;
+    }
+
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
 }
