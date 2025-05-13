@@ -1,28 +1,30 @@
 const logo = document.querySelector(".logo-header img") || document.querySelector(".logo-header");
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
-  const logo = document.querySelector(".logo-header");
-  const sideMenu = document.getElementById("side-menu");
+  const existingOverlay = document.getElementById('transition-overlay');
+  if (existingOverlay) {
+    existingOverlay.remove();
+  }
 
-  // Assure que le menu est fermé au départ
-  sideMenu.classList.remove("menu-open");
+  document.querySelectorAll('.cell a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
 
-  logo.addEventListener("click", function (event) {
-    event.stopPropagation();
-    sideMenu.classList.toggle("menu-open");
+      const overlay = document.createElement('div');
+      overlay.id = 'transition-overlay';
+      document.body.appendChild(overlay);
+
+      requestAnimationFrame(() => {
+        overlay.classList.add('active');
+      });
+
+      setTimeout(() => {
+        window.location.href = link.href;
+      }, 500);
+    });
   });
 
-  document.addEventListener("click", function (event) {
-    if (!sideMenu.contains(event.target) && !logo.contains(event.target)) {
-      sideMenu.classList.remove("menu-open");
-    }
-  });
-});
 
-
-  // Code menu (inchangé)
   const logo = document.querySelector(".logo-header");
   const sideMenu = document.getElementById("side-menu");
 
@@ -88,4 +90,3 @@ function filterGames() {
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("searchInput").addEventListener("input", filterGames);
 });
-
